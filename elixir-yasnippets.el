@@ -9,14 +9,17 @@
 
 ;;; Code:
 
-(setq elixir-snippets-dir (file-name-directory (or (buffer-file-name)
-                                                    load-file-name)))
+;;(setq elixir-snippets-dir (file-name-directory  (buffer-file-name)))
+
+;; Until I figure out a way to add the elixir-snippets-dir in a general
+;; way, I'll just hardcode snip-dir in `elixir-snippets-initialize`,
+;; rather than using expand-file-name
 
 ;;;###autoload
 (defun elixir-snippets-initialize ()
-  (let ((snip-dir (expand-file-name "snippets" elixir-snippets-dir)))
+  (let ((snip-dir "~/.emacs.d/vendor/elixir-yasnippets/snippets/"))
     (add-to-list 'yas-snippet-dirs snip-dir t)
-    (yas-load-directory snip-dir)))
+    (yas/load-directory snip-dir)))
 
 ;;;###autoload
 (eval-after-load 'yasnippet
